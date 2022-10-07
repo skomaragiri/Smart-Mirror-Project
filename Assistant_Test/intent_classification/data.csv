@@ -1,0 +1,7 @@
+text,intent
+how are you?,greeting
+hello,greeting
+see you later,leaving
+talk to you later,leaving
+hows the weather,weather
+whats the temperature,weather
