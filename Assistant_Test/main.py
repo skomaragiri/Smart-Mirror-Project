@@ -1,16 +1,23 @@
 from intent_classification.intent_classification import IntentClassifier
 intent_classifier = IntentClassifier()
-from assistant_functions.hello import *
+from assistant_functions.hello import hello
+from assistant_functions.bye import bye
+from assistant_functions.calendar import date
+from assistant_functions.IntSearch import search
+from assistant_functions.time import timeCheck
+from assistant_functions.news import news
+from assistant_functions.reminder import remind
+from assistant_functions.weather import weather
 import pyttsx3
 import speech_recognition as sr
 
 
 class Assistant:
 
-    mappings = {'greeting': hello()}
+    # mappings = {'greeting': hello()}
 
     def __init__(self, name):
-        self.name = name #Create instance variable name
+        self.name = name # Create instance variable name
         
         self.speech_engine = pyttsx3.init()
         self.speech_engine.setProperty("rate", 150)
