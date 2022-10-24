@@ -1,6 +1,6 @@
 from intent_classification.intent_classification import IntentClassifier
 intent_classifier = IntentClassifier()
-from assistant_functions.hello import hello
+from assistant_functions.hello import *
 import pyttsx3
 import speech_recognition as sr
 
@@ -39,7 +39,14 @@ class Assistant:
         intent = intent_classifier.predict(text)
 
         replies = {
-            'greeting' : hello
+            'greeting' : hello,
+            'leaving' : bye,
+            'weather' : weather,
+            'internet' : search,
+            'reminder' : remind,
+            'news' : news,
+            'time' : timeCheck,
+            'calendar' : date
             }
 
         reply_func = replies[intent]
