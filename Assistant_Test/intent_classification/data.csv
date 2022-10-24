@@ -1,17 +1,36 @@
 text,intent
 how are you?,greeting
 hello,greeting
+whats up,greeting
+hi,greeting
+hey,greeting
 see you later,leaving
+goodbye,leaving
 talk to you later,leaving
+bye,leaving
+see ya,leaving
 hows the weather,weather
 whats the temperature,weather
+is it cold outside,weather
+weather,weather
+hot today?,weather
 search wikipedia,internet
 tell me about,internet
+search the internet,internet
+look up,internet
 what day is it?,calendar
 what is the date,calendar
+whats the date today,calendar
+tell me date,calendar
+make a reminder,reminder
+dont forget,reminder
 remind me ,reminder 
-don’t let me forget,reminder 
+do not let me forget,reminder 
 what is going on today,news
-what's happening,news
+what is happening,news
+current event,news
+anything interesting happening?,news
 tell me the time,time
 what time is it,time
+whats the time,time
+time ,time
