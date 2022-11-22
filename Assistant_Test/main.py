@@ -30,8 +30,8 @@ class Assistant:
     
         with self.mic as source:
             print("listening")
-            audio = self.r.listen(source, timeout=7, phrase_time_limit=10) 
-
+            audio = self.r.listen(source, timeout=7, phrase_time_limit=10) #(audio source, seconds of waiting for phrase to start before throwing exception, max seconds of speaking time after phrase start before processing)
+            
         return self.r.recognize_google(audio)
 
 
@@ -39,7 +39,9 @@ class Assistant:
         """Uses pyttsx3 engine text-to-speech to to say 'text' argument"""
 
         self.speech_engine.say(text)
+        print(f"Assistant: {text}\n")
         self.speech_engine.runAndWait()
+        
 
 
     def reply(self, text):
@@ -65,8 +67,9 @@ class Assistant:
     def main(self):
         while True:
             said = self.listen()
+            print(f"\nYou: {said}")
             self.reply(said)
-
+            
 
 assistant = Assistant("Assistant")
 assistant.main()

@@ -17,6 +17,8 @@ hot today?,weather
 search wikipedia,internet
 tell me about,internet
 search the internet,internet
+when,internet
+what time does,internet
 look up,internet
 what day is it?,calendar
 what is the date,calendar

@@ -28,7 +28,7 @@ intent_classifier = IntentClassifier()
 #Prints greeting
 print(intent_classifier.predict("Hello, how are you?"))
 
-print(intent_classifier.predict("Hi"))
+print(intent_classifier.predict("Look up what day did Lincoln die"))
 
 #prints weather
-print(intent_classifier.predict("what is the weather?"))
+print(intent_classifier.predict("look up what time the game starts?"))

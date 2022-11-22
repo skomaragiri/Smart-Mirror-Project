@@ -1,7 +1,14 @@
-from datetime import datetime
+import time 
+import datetime
+from time import strftime
+
 
 def timeCheck():
-    time_now = datetime.now
-    current_hour = time_now.strftime("%H")
-    current_min = time_now.strftime("%M")
-    return f"It is currently {current_hour} {current_min}"
+    tm = datetime.datetime.now()
+    hour = tm.strftime('%#H')
+    #if(hour[0] == 0):
+        
+    minute = tm.strftime('%M')
+    #hour = int(datetime.datetime.now().second)
+    print(f"It is currently {hour} {minute}")
+    return f"It is currently {hour} {minute}"
