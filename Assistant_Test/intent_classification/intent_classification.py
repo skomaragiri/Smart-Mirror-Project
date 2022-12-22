@@ -6,8 +6,6 @@ from sklearn.naive_bayes import MultinomialNB #Import Naive Bayes
 class IntentClassifier:
     def __init__(self):
         self.data = pd.read_csv('intent_classification/data.csv') #Read the CSV file
-        #You might need to change 'data.csv' in the line above to intent_classification/data.csv
-        #if you run it from the root directory of the project.
         
         self.train() #It will train whenever an instance is made
 
@@ -22,13 +20,13 @@ class IntentClassifier:
     def predict(self, text):
         return self.clf.predict(self.count_vect.transform([text]))[0]
 
-#Test it out now!
+# Test 
 intent_classifier = IntentClassifier()
 
-#Prints greeting
+
 print(intent_classifier.predict("Hello, how are you?"))
 
-print(intent_classifier.predict("Look up what day did Lincoln die"))
+print(intent_classifier.predict("what day is"))
 
-#prints weather
-print(intent_classifier.predict("look up what time the game starts?"))
+
+print(intent_classifier.predict("when did george washington cross the delaware"))

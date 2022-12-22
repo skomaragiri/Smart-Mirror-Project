@@ -1,3 +1,10 @@
+import pyttsx3
+
 def bye():
-    return "Goodbye"
+    voice = pyttsx3.init()
+    print("Goodbye")
+    voice.say("Goodbye")
+    voice.runAndWait()
+    quit()
+    
     
