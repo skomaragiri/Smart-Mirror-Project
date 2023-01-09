@@ -29,4 +29,4 @@ print(intent_classifier.predict("Hello, how are you?"))
 print(intent_classifier.predict("what day is"))
 
 
-print(intent_classifier.predict("when did george washington cross the delaware"))
+print(intent_classifier.predict("show me my to do list "))

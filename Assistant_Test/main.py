@@ -10,6 +10,10 @@ from assistant_functions.reminder import remind
 from assistant_functions.weather import weather
 import pyttsx3
 import speech_recognition as sr
+import datetime
+import time
+from time import strftime
+
 
 
 class Assistant:
@@ -33,7 +37,7 @@ class Assistant:
 
         with self.mic as source:
             print("listening")
-            r.pause_threshold = 1 # wait 1sec of silence to determine end of phrase
+            r.pause_threshold = 0.5 # wait 1sec of silence to determine end of phrase
             audio = self.r.listen(source, phrase_time_limit=10) #(audio source, seconds of waiting for phrase to start before throwing exception, max seconds of speaking time after phrase start before processing)
             #source, timeout = 7,
         try:
@@ -79,8 +83,10 @@ class Assistant:
         reply_func = replies[intent]    # reply_func gets the function to execute based on the intent predicted from user speech
 
         if callable(reply_func):        # if the function is callable execute function
-             if(intent == 'internet'):
+             if (intent == 'internet'):
                 self.say(reply_func(text))      # generates speech from returned text string in user function
+             elif (intent == 'reminder'):
+                self.say(reply_func(text)) 
              else:
                  self.say(reply_func())
 
@@ -91,6 +97,17 @@ class Assistant:
 
 
     def main(self):
+
+        hour = int(datetime.datetime.now().hour)
+        if hour>= 0 and hour<12:
+            self.say("Good Morning!\n")
+  
+        elif hour>= 12 and hour<18:
+            self.say("Good Afternoon!\n")  
+  
+        else:
+            self.say("Good Evening!\n") 
+
         while True:
             said = self.listen()        # listen for user speech input
             #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)

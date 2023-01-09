@@ -27,7 +27,13 @@ whats the date today,calendar
 tell me date,calendar
 make a reminder,reminder
 dont forget,reminder
+add to my reminders,reminder
+remind me that,reminder
 remind me ,reminder 
+show me my reminders,reminder
+display reminders,reminder
+to do,reminder
+tell me about my reminders,reminder
 do not let me forget,reminder 
 what is going on today,news
 what is happening,news
