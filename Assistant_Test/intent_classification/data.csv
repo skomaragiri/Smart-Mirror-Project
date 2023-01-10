@@ -1,5 +1,5 @@
 text,intent
-how are you?,greeting
+how are you doing today?,greeting
 hello,greeting
 whats up,greeting
 hi,greeting
@@ -36,8 +36,9 @@ to do,reminder
 tell me about my reminders,reminder
 do not let me forget,reminder 
 what is going on today,news
-what is happening,news
+what is happening in the world,news
 current event,news
+Are there any current events?,news
 anything interesting happening?,news
 tell me the time,time
 what time is it,time

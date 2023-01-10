@@ -86,7 +86,9 @@ class Assistant:
              if (intent == 'internet'):
                 self.say(reply_func(text))      # generates speech from returned text string in user function
              elif (intent == 'reminder'):
-                self.say(reply_func(text)) 
+                self.say(reply_func(text))
+#             elif (intent == 'news'):
+#                self.say(reply_func(text))
              else:
                  self.say(reply_func())
 
