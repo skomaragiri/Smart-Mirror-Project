@@ -44,9 +44,13 @@ def remind(request):
 #            for idx in range(idx1 + len(sub1) + 1, idx2):
 #                res = res + wline[idx]
         else:
-            pass
+            return "I am sorry I did not understand"
 
         with open('RemindersList.txt', 'a') as f:
+            if res[0] == ' ':
+                res = res[1:]
+            if res[-1] == ' ':
+                res = res[0:-1]
             f.write(f"{res}\n")
             f.close()
 
@@ -62,31 +66,61 @@ def remind(request):
 
     def clr(line):
         rmvline = line
+        clear_flag = False
+        delete_line_flag = False
+
+
         if 'remove' in rmvline:
             sub1 = 'remove'
             sub2 = 'from'
             idx1 = rmvline.index(sub1)
             idx2 = rmvline.rfind(sub2)
             res = rmvline[idx1 + len(sub1) + 1 : idx2]
+            if res[0] == ' ':
+                res = res[1:]
+            if res[-1] == ' ':
+                res = res[0:-1]
+            delete_line_flag = True
         elif 'take' in rmvline:
             sub1 = 'take'
             sub2 = 'off'
             idx1 = rmvline.index(sub1)
             idx2 = rmvline.rfind(sub2)
             res = rmvline[idx1 + len(sub1) + 1 : idx2]
+            if res[0] == ' ':
+                res = res[1:]
+            if res[-1] == ' ':
+                res = res[0:-1]
+            delete_line_flag = True
+        elif 'clear' in rmvline:
+            clear_flag = True
+            delete = open('RemindersList.txt', 'w')
+            delete.close()
+        else:
+            return "I am sorry, I did not understand"
 
+        
 
-        with open('RemindersList.txt', 'r') as f:
-            inputLines = f.readlines()
-            lineIndex = 1
-            with open('RemindersList.txt', 'w') as f:
-                for textline in inputLines:
-                    if res not in textline:
-                        f.write(textline)
-                        lineIndex += 1
-        f.close()
-        print(f"{res} has been removed from your list of reminders")
-        return f"{res} has been removed from your list of reminders"
+        if (delete_line_flag == True):
+            with open('RemindersList.txt', 'r') as f:
+                inputLines = f.readlines()
+                lineIndex = 1
+                with open('RemindersList.txt', 'w') as f:
+                    for textline in inputLines:
+                        if (textline[0] == ' '):
+                            textline = textline[1:]
+                        if (textline[-1] == ' '):
+                            textline = textline[0:-1]
+                        if res not in textline:
+                            f.write(textline)
+                            lineIndex += 1
+            f.close()
+        if clear_flag:
+            print("Reminders Cleared")
+            return f"I have cleared your reminders"
+        else:
+            print(f"{res} has been removed from your list of reminders")
+            return f"{res} has been removed from your list of reminders"
 
 
     #or "remind me" or "forget" or "put"

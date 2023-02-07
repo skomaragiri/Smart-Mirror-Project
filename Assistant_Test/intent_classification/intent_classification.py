@@ -24,9 +24,9 @@ class IntentClassifier:
 intent_classifier = IntentClassifier()
 
 
-print(intent_classifier.predict("Hello, how are you?"))
+print(intent_classifier.predict("tell me about"))
 
-print(intent_classifier.predict("Are there any current events"))
+print(intent_classifier.predict("remind me about the homework I have due"))
 
 
 print(intent_classifier.predict("show me my to do list "))
