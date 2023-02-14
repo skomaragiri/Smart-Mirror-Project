@@ -96,7 +96,7 @@ def weather(request):
             print()
 
         answer = listen_speak.listen()
-        choices = ['first', 'number one', 'second', 'number two', 'third', 'number three', 'fourth', 'number four', 'fifth', 'number five', 'last']
+        #choices = ['first', 'number one', 'second', 'number two', 'third', 'number three', 'fourth', 'number four', 'fifth', 'number five', 'last']
         broken_answer = answer.split()
         
         if broken_answer[-1] in statesf:
@@ -157,6 +157,12 @@ def weather(request):
             print("Invalid selection")
             returnVal = "Sorry, I didn't understand"
             return returnVal
+
+        with open('WeatherCityName.txt', 'w') as f:
+            f.write(f"{sel_city}\n")
+            f.write(f"{str(latitude)}\n")
+            f.write(f"{str(longitude)}\n")
+        f.close()
 
         forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude={exclude}&appid={api_key}"
         weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=imperial&APPID={api_key}"
@@ -228,6 +234,12 @@ def weather(request):
         name = cities[0]
         latitude = lat[0]
         longitude = lon[0]
+
+        with open('WeatherCityName.txt', 'w') as f:
+            f.write(f"{name}\n")
+            f.write(f"{str(latitude)}\n")
+            f.write(f"{str(longitude)}\n")
+        f.close()
 
         forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude={exclude}&appid={api_key}"
         weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=imperial&APPID={api_key}"

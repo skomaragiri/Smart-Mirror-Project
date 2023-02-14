@@ -114,11 +114,11 @@ class Assistant:
   
         elif hour>= 12 and hour<18:
             #self.say("Good Afternoon!\n")
-            listen_speak.say("Good Morning!\n")
+            listen_speak.say("Good Afternoon!\n")
   
         else:
             #self.say("Good Evening!\n")
-            listen_speak.say("Good Morning!\n") 
+            listen_speak.say("Good Evening!\n") 
 
         while True:
             #said = self.listen()        # listen for user speech input
@@ -130,5 +130,5 @@ class Assistant:
             self.reply(said)            # take user speech as said argument for the reply function
             
 intentclassifier = IntentClassifier()
-assistant = Assistant("Assistant")      # name of assistant
+assistant = Assistant("Marvis")      # name of assistant was "Assistant"
 assistant.main()                        # run main method

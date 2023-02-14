@@ -24,7 +24,7 @@ class IntentClassifier:
 intent_classifier = IntentClassifier()
 
 
-print(intent_classifier.predict("tell me about"))
+print(intent_classifier.predict("tell me the weather in Pomona"))
 
 print(intent_classifier.predict("remind me about the homework I have due"))
 
