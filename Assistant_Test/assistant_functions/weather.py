@@ -160,9 +160,12 @@ def weather(request):
 
         with open('WeatherCityName.txt', 'w') as f:
             f.write(f"{sel_city}\n")
-            f.write(f"{str(latitude)}\n")
-            f.write(f"{str(longitude)}\n")
         f.close()
+
+        with open('WeatherCityCoord.txt', 'w') as file:
+            file.write(f"{str(latitude)}\n")
+            file.write(f"{str(longitude)}\n")
+        file.close()
 
         forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude={exclude}&appid={api_key}"
         weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=imperial&APPID={api_key}"
@@ -237,9 +240,13 @@ def weather(request):
 
         with open('WeatherCityName.txt', 'w') as f:
             f.write(f"{name}\n")
-            f.write(f"{str(latitude)}\n")
-            f.write(f"{str(longitude)}\n")
         f.close()
+
+        with open('WeatherCityCoord.txt', 'w') as file:
+            file.write(f"{str(latitude)}\n")
+            file.write(f"{str(longitude)}\n")
+        file.close()
+
 
         forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude={exclude}&appid={api_key}"
         weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=imperial&APPID={api_key}"
