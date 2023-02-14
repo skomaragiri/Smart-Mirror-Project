@@ -122,8 +122,8 @@ class Assistant:
 
         while True:
             #said = self.listen()        # listen for user speech input
-            said = listen_speak.listen()   # * In Use *
-            #said = "Tell me the weather in Lancaster"   # For debugging using text
+            #said = listen_speak.listen()   # * In Use *
+            said = "Tell me the weather in Quartz Hill, California"   # For debugging using text
             #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)
             if(said == "qwertyifnfh"):  # if what was said was not understood
                 continue

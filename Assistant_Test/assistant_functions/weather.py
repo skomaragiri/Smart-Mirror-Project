@@ -23,16 +23,16 @@ dt = datetime.now()
 def weather(request):
     if 'in' in request:
         req_loc = request.split('in ', 1)[1] #forcast FOR, weather FOR
-        req_loc = req_loc.split()
-    if 'for' in request:
+        #req_loc = req_loc.split()
+    elif 'for' in request:
         splt_i = request.rfind('for')
         splt_str = request[splt_i:]
         req_loc = splt_str.split('for ', 1)[1] #forcast FOR, weather FOR
-        req_loc = req_loc.split()
-    if len(req_loc) > 1:
-        req_loc = req_loc[-2]
-    else:
-        req_loc = req_loc[-1]
+        #req_loc = req_loc.split()
+    #if len(req_loc) > 1:
+    #    req_loc = req_loc[-2]
+    #else:
+    #    req_loc = req_loc[-1]
 
     geo_url = f"http://api.openweathermap.org/geo/1.0/direct?q={req_loc}&limit={5}&appid={api_key}"
     api_geo_req = requests.get(geo_url)
