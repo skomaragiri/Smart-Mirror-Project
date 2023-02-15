@@ -234,6 +234,11 @@ def weather(request):
 
 
     else:
+
+        if (len(geo_data) == 0):
+                returnVal = "I could not find that, try just asking about the city"
+                return returnVal
+
         name = cities[0]
         latitude = lat[0]
         longitude = lon[0]
