@@ -15,7 +15,9 @@ from datetime import datetime
 
 api_key = '03e0a6f84da3d99aab0775a23353cba3'
 exclude = 'minute,hourly'
-
+default_city = 'pomona'
+default_lat = 34.0551
+default_lon = 117.75
 
 dt = datetime.now()
 
@@ -28,7 +30,70 @@ def weather(request):
         splt_i = request.rfind('for')
         splt_str = request[splt_i:]
         req_loc = splt_str.split('for ', 1)[1] #forcast FOR, weather FOR
-        #req_loc = req_loc.split()
+    else:
+            with open('WeatherCityName.txt', 'w') as f:
+                f.write(f"{default_city}\n")
+                f.close()
+
+            with open('WeatherCityCoord.txt', 'w') as file:
+                file.write(f"{str(default_lat)}\n")
+                file.write(f"{str(default_lon)}\n")
+            file.close()
+            highs = []
+            lows = []
+            #hum = []
+            #wind = []
+            #wind_deg = []
+            descrip = []
+            forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={default_lat}&lon={default_lon}&units=imperial&exclude={exclude}&appid={api_key}"
+            weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={default_lat}&lon={default_lon}&units=imperial&APPID={api_key}"
+
+            api_forecast = requests.get(forecast_url)
+            forecast_data = api_forecast.json()
+            api_weather = requests.get(weather_url)
+            weather_data = api_weather.json()    
+            for i in forecast_data['daily']:
+                #print(i)
+
+                highs.append(round(i['temp']['max']))
+                lows.append(round(i['temp']['min']))
+
+                descrip.append(i['weather'][0]['main'] + ": " + i['weather'][0]['description'])
+
+            if 'forecast' in request:
+                x = dt.weekday()
+                days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+                today = days[x]
+                today_index = days.index(today)
+                string = f'[{sel_city} - 8 day forecast]\n'
+
+                for j in range(len(highs)):
+                    if j == 0:
+                       string += f'\n{today} (Today)\n'
+                    else:
+                         today_index = (today_index + 1) % 7
+                         next_day = days[today_index]
+                         string += f"\n{next_day}\n"
+
+
+                    string += 'High: ' + str(highs[j]) + "°F\n"
+                    string += 'Low: ' + str(lows[j]) + "°F\n"
+                    string += 'Conditions: ' + descrip[j] + "\n"
+
+                print(string)
+                returnVal = f"Here is this week's forecast in the default city of {default_city}"
+                return returnVal
+
+            else:
+                des = weather_data['weather'][0]['description']
+                temp = round(weather_data['main']['temp'])
+                high = round(weather_data['main']['temp_max'])
+                low = round(weather_data['main']['temp_min'])
+                print(default_city)
+                print(f"{temp}°F")
+                print(f"H: {high}°F L: {low}°F")        
+                returnVal = f"It is currently {temp} degrees Fahrenheit and {des} in the default city of {default_city}, with a high of {high} and a low of {low}"          #req_loc = req_loc.split()
+                return returnVal
     #if len(req_loc) > 1:
     #    req_loc = req_loc[-2]
     #else:
@@ -236,8 +301,8 @@ def weather(request):
     else:
 
         if (len(geo_data) == 0):
-                returnVal = "I could not find that, try just asking about the city"
-                return returnVal
+            returnVal = f"I am sorry I could not find what you were looking for please try again (only say the city)"
+            return returnVal
 
         name = cities[0]
         latitude = lat[0]

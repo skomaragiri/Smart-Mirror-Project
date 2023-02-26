@@ -33,7 +33,7 @@ class Listen_Speak:
             print("Unable to Recognize your voice.") 
             return "qwertyifnfh"        # return nonsense if not understood to continue loop
      
-        return query
+        return query.lower() #added .lower()
 
             
        # return self.r.recognize_google(audio) # return the recognized speech using google speech API

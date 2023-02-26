@@ -19,6 +19,8 @@ def remind(request):
             res = (wline.split('to', 1))[1]
         elif 'remind me that' in wline:
             res = (wline.split('that', 1))[1]
+        elif 'remember' in wline:
+            res = (wline.split('remember', 1))[1]
         elif 'remind me' in wline:                                  # small bugs with this one where saying "I have hw due" = calander  
             res = (wline.split('me', 1))[1]
         elif 'about' in wline:
@@ -37,7 +39,11 @@ def remind(request):
             res = wline[idx1 + len(sub1) + 1 : idx2]
         elif 'put' in wline:
             sub1 = 'put'
-            sub2 = 'on'
+            if "on " in wline:
+                sub2 = 'on'
+            elif "in " in wline:
+                sub2 = 'in'
+            
             idx1 = wline.index(sub1)
             idx2 = wline.rfind(sub2)
             res = wline[idx1 + len(sub1) + 1 : idx2]
@@ -129,6 +135,10 @@ def remind(request):
         return rmndr
 
     elif "forget" in request:
+        rmndr = wr(request)
+        return rmndr
+
+    elif "remember" in request:
         rmndr = wr(request)
         return rmndr
 

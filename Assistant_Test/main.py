@@ -8,6 +8,7 @@ from assistant_functions.time import timeCheck
 from assistant_functions.news import news
 from assistant_functions.reminder import remind
 from assistant_functions.weather import weather
+from assistant_functions.Help import assist
 
 from assistant_functions.ListenSpeak import listen_speak 
 
@@ -80,7 +81,8 @@ class Assistant:
             'reminder' : remind,
             'news' : news,
             'time' : timeCheck,
-            'calendar' : date
+            'calendar' : date,
+            'help' : assist
             }
 
         reply_func = replies[intent]    # reply_func gets the function to execute based on the intent predicted from user speech
@@ -93,6 +95,9 @@ class Assistant:
                 #self.say(reply_func(text))
                 listen_speak.say(reply_func(text))
              elif (intent == 'weather'):
+                #self.say(reply_func(text))
+                listen_speak.say(reply_func(text))
+             elif (intent == 'calendar'):
                 #self.say(reply_func(text))
                 listen_speak.say(reply_func(text))
              else:
@@ -122,8 +127,8 @@ class Assistant:
 
         while True:
             #said = self.listen()        # listen for user speech input
-            #said = listen_speak.listen()   # * In Use *
-            said = "Tell me the weather in Quartz Hill, California"   # For debugging using text
+            said = listen_speak.listen()   # * In Use *
+            #said = "Is it hot today"   # For debugging using text
             #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)
             if(said == "qwertyifnfh"):  # if what was said was not understood
                 continue

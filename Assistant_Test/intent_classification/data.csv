@@ -5,6 +5,7 @@ whats up,greeting
 hi,greeting
 hey,greeting
 see you later,leaving
+good bye,leaving
 goodbye,leaving
 talk to you later,leaving
 bye,leaving
@@ -20,7 +21,7 @@ search wikipedia,internet
 tell me about,internet
 search the internet,internet
 when,internet
-what,internet
+what is,internet
 what can you tell me about,internet
 what do you know about,internet
 who,internet
@@ -31,6 +32,15 @@ what day is it?,calendar
 what is the date,calendar
 whats the date today,calendar
 give me the date,calendar
+do I have plans,calendar
+am I busy,calendar
+put an event on my calendar,calendar
+anything to do on,calendar
+delete an event on my calendar,calendar
+remove from my calendar,calendar
+add to my calendar,calendar
+what do I have to do on,calendar
+any events?,calendar
 tell me date,calendar
 make a reminder,reminder
 dont forget,reminder
@@ -39,11 +49,12 @@ remind me that,reminder
 remind me ,reminder 
 show me my reminders,reminder
 display reminders,reminder
-to do,reminder
+to-do list,reminder
 remind me I have homework due,reminder
 dont let me forget about the,reminder
 remind me about my,reminder
 tell me about my reminders,reminder
+remember,reminder
 do not let me forget,reminder 
 tell me what is going on,news
 what is going on today,news
@@ -57,3 +68,9 @@ what time is it,time
 whats the time,time
 time ,time
 give me the time,time
+What can I ask you,help
+what can you do?,help
+what can you help me with,help
+help me,help
+help,help
+what are your functions,help
