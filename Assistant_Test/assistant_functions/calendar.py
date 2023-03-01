@@ -178,6 +178,11 @@ def read_event(text, indx):
 
     QuerydateDT = get_date(Querydate)
     QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time()) #returns form year-month-day 00:00:00
+
+    if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+        retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+        return retVal
+
     found_event = evnt_collection.find({'event_start': QuerydateDT})
     for i in found_event:
         #evntsDF = pandas.DataFrame(found_evnt)
@@ -195,6 +200,9 @@ def delete_1event(text):
             Querydate = ans.split("on ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
 #        elif "next " in ans:
@@ -207,10 +215,16 @@ def delete_1event(text):
             Querydate = ans.split("one ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
         else:
             evnt = ans
+            if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
+                retVal = f"I'm sorry, I could not find {evnt}"
+                return retVal
             evnt_collection.delete_one({'event_name' : f"{evnt}"})
             retVal = f"{evnt} has been removed from your calendar"
 
@@ -221,6 +235,9 @@ def delete_1event(text):
             Querydate = ans.split("on ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
 #        elif "next " in ans:
@@ -233,10 +250,16 @@ def delete_1event(text):
             Querydate = ans.split("one ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
         else:
             evnt = ans
+            if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
+                retVal = f"I'm sorry, I could not find {evnt}"
+                return retVal
             evnt_collection.delete_one({'event_name' : f"{evnt}"})
             retVal = f"{evnt} has been removed from your calendar"
 
@@ -247,6 +270,9 @@ def delete_1event(text):
             Querydate = text.split("on ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
          else:
@@ -259,6 +285,10 @@ def delete_1event(text):
                  evnt = evnt[1:]
              if evnt[-1] == ' ':
                  evnt = evnt[0:-1]
+
+             if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
+                retVal = f"I'm sorry, I could not find {evnt}"
+                return retVal
              evnt_collection.delete_one({'event_name': f"{evnt}"})
              retVal = f"{evnt} has been removed from your calendar"
          
@@ -267,6 +297,9 @@ def delete_1event(text):
             Querydate = text.split("on ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
          else:
@@ -282,6 +315,10 @@ def delete_1event(text):
                  evnt = evnt[1:]
              if evnt[-1] == ' ':
                  evnt = evnt[0:-1]
+             
+             if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
+                retVal = f"I'm sorry, I could not find {evnt}"
+                return retVal
              evnt_collection.delete_one({'event_name': f"{evnt}"})
              retVal = f"{evnt} has been removed from your calendar"
 
@@ -290,6 +327,9 @@ def delete_1event(text):
             Querydate = text.split("on ", 1)[1]
             QuerydateDT = get_date(Querydate)
             QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time())
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+                retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
+                return retVal
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
          else:
@@ -305,6 +345,10 @@ def delete_1event(text):
                  evnt = evnt[1:]
              if evnt[-1] == ' ':
                  evnt = evnt[0:-1]
+             
+             if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
+                retVal = f"I'm sorry, I could not find {evnt}"
+                return retVal
              evnt_collection.delete_one({'event_name': f"{evnt}"})
              retVal = f"{evnt} has been removed from your calendar"
 
