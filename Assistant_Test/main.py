@@ -100,6 +100,12 @@ class Assistant:
              elif (intent == 'calendar'):
                 #self.say(reply_func(text))
                 listen_speak.say(reply_func(text))
+             elif (intent == 'time'):
+                #self.say(reply_func(text))
+                listen_speak.say(reply_func(text))
+             elif (intent == 'greeting'):
+                #self.say(reply_func(text))
+                listen_speak.say(reply_func(text))
              else:
                  #self.say(reply_func())
                  listen_speak.say(reply_func())
@@ -111,7 +117,7 @@ class Assistant:
 
 
     def main(self):
-
+        WAKE = "hey marvis"
         hour = int(datetime.datetime.now().hour)
         if hour>= 0 and hour<12:
             #self.say("Good Morning!\n")
@@ -124,15 +130,20 @@ class Assistant:
         else:
             #self.say("Good Evening!\n")
             listen_speak.say("Good Evening!\n") 
-
+        print("Say 'Hey Marvis' to get started")
         while True:
             #said = self.listen()        # listen for user speech input
-            said = listen_speak.listen()   # * In Use *
-            #said = "Is it hot today"   # For debugging using text
-            #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)
-            if(said == "qwertyifnfh"):  # if what was said was not understood
-                continue
-            self.reply(said)            # take user speech as said argument for the reply function
+            #print("Listening")
+            said = listen_speak.listen()
+
+            if said.count(WAKE) > 0:
+                
+                said = listen_speak.listen()   # * In Use *
+                #said = "Is it hot today"   # For debugging using text
+                #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)
+                if(said == "qwertyifnfh"):  # if what was said was not understood
+                    continue
+                self.reply(said)            # take user speech as said argument for the reply function
             
 intentclassifier = IntentClassifier()
 assistant = Assistant("Marvis")      # name of assistant was "Assistant"

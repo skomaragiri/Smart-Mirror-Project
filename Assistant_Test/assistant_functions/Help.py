@@ -4,6 +4,7 @@ def assist():
     print("Get date and time or add events to your calendar")
     print("Edit a list of reminders")
     print("Get current events")
+    print("Tell Jokes")
     print("Search Wikipedia")
 
     return "Here are some things you can ask me"

@@ -1,17 +1,29 @@
 text,intent
+thanks,greeting
+tell me something funny,greeting
+make me laugh,greeting
+I want to giggle,greeting
+something hilarious,greeting
+thank you,greeting
+appreciate it,greeting
+hows it going,greeting
+tell me a joke,greeting
 how are you doing today?,greeting
 hello,greeting
+what's up,greeting
 whats up,greeting
 hi,greeting
 hey,greeting
 see you later,leaving
 good bye,leaving
+Good bye.,leaving
 goodbye,leaving
 talk to you later,leaving
 bye,leaving
 see ya,leaving
-hows the weather,weather
-whats the temperature,weather
+how's the weather,weather
+what's the weather,weather
+what's the temperature,weather
 is it cold outside,weather
 weather,weather
 forecast for,weather
@@ -28,20 +40,22 @@ who,internet
 tell me what you know about,internet
 what time does the,internet
 look up,internet
-what day is it?,calendar
-what is the date,calendar
-whats the date today,calendar
-give me the date,calendar
 do I have plans,calendar
 am I busy,calendar
 put an event on my calendar,calendar
+free up my schedule,calendar
+clear my schedule,calendar
 anything to do on,calendar
 delete an event on my calendar,calendar
 remove from my calendar,calendar
 add to my calendar,calendar
 what do I have to do on,calendar
 any events?,calendar
-tell me date,calendar
+clear my calendar,calendar
+cancel my plans,calendar
+remove all events,calendar
+clear all plans,calendar
+delet all events,calendar
 make a reminder,reminder
 dont forget,reminder
 add to my reminders,reminder
@@ -65,9 +79,14 @@ give me current events,news
 anything interesting happening?,news
 tell me the time,time
 what time is it,time
-whats the time,time
+what's the time,time
 time ,time
 give me the time,time
+what day is it?,time
+what is the date,time
+whats the date today,time
+give me the date,time
+tell me date,time
 What can I ask you,help
 what can you do?,help
 what can you help me with,help

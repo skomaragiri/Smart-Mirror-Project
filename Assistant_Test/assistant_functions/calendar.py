@@ -9,20 +9,20 @@ import pandas
 client = pymongo.MongoClient("mongodb+srv://phelpsian00:W25Zz49Xrv6P1xav@cluster0.h9d6t3f.mongodb.net/test")
 dbname = client['Smart_Mirror']
 evnt_collection = dbname["Calendar_Events"]
-read_strs = ["any events", "anything to do", "am i busy", "do i have plans", "what do i have", "do i have any plans"]
-
+read_strs = ["any events", "anything to do", "am i busy", "do i have plans", "what do i have", "do i have any plans", "do i have events", "what events do i have", "what plans do i have"]
+clearALL_strs = ["clear my calendar", "remove all", "cancel my plans", "delete all", "clear all", "free up my schedule", "clear my schedule"]
 
 def date(text):
     #dbname = get_database()
     #evnt_collection = dbname["Events"]
 
-    dt = datetime.datetime.now()
-    month_name = dt.strftime('%B')
-    year = int(datetime.datetime.now().year)
-    month = int(datetime.datetime.now().month)    #maybe move to time
-    day = int(datetime.datetime.now().day)
-    day_name = dt.strftime('%A')
-    last_digit = str(day)[-1] 
+    #dt = datetime.datetime.now()
+    #month_name = dt.strftime('%B')
+    #year = int(datetime.datetime.now().year)
+    #month = int(datetime.datetime.now().month)    #maybe move to time
+    #day = int(datetime.datetime.now().day)
+    #day_name = dt.strftime('%A')
+    #last_digit = str(day)[-1] 
     #print(f"{last_digit}")
 
     
@@ -30,9 +30,18 @@ def date(text):
     rd_check = [phrase for phrase in read_strs if(phrase in text.lower())]
     if (len(rd_check) > 0):
         rd_check = rd_check.pop()
-    if rd_check:
-       idx = read_strs.index(rd_check)
-       retVal = read_event(text.lower(), idx)
+    #if rd_check:
+        idx = read_strs.index(rd_check)
+        retVal = read_event(text.lower(), idx)
+        return retVal
+
+    delALL_check = [phrase for phrase in clearALL_strs if(phrase in text.lower())]
+    if (len(delALL_check) > 0):
+        delALL_check = delALL_check.pop()
+    #if rd_check:
+        idx = clearALL_strs.index(delALL_check)
+        retVal = delete_ALLevents(text.lower(), idx)
+        return retVal
 
     elif "add " in text:
         add_event(text.lower())
@@ -46,8 +55,8 @@ def date(text):
         retVal = delete_1event(text.lower())
     elif "delete" in text:
         retVal = delete_1event(text.lower())
-    elif "clear my calendar" or "remove all" or "cancel my plans" in text:  # add seperate func for clearing all events on a date
-        pass
+    else:
+        retVal = "I'm sorry I did not understand"
 
         
         
@@ -203,6 +212,28 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
             retVal = f"The event on {QuerydateDT} has been removed"
 #        elif "next " in ans:
@@ -218,8 +249,30 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
         else:
             evnt = ans
             if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
@@ -238,8 +291,31 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
+            
 #        elif "next " in ans:
 #            Querydate = ans.split("next ", 1)[1]
 #            QuerydateDT = get_date(Querydate)
@@ -253,8 +329,31 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
+            
         else:
             evnt = ans
             if evnt_collection.count_documents({'event_start': f"{evnt}"}) == 0:
@@ -273,8 +372,31 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
+            
          else:
              sub1 = "remove"
              sub2 = "from"
@@ -300,8 +422,31 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
+            
          else:
              sub1 = "take"
              if "off" in text:
@@ -330,8 +475,31 @@ def delete_1event(text):
             if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
                 retVal = f"I'm sorry, I could not find any event on {QuerydateDT}"
                 return retVal
+            if evnt_collection.count_documents({'event_start': QuerydateDT}) > 1:
+                listen_speak.say("I found multiple events on that date, which one did you want to remove?")
+                found_event = evnt_collection.find({'event_start': QuerydateDT})
+                evnt_names = []
+                for i in found_event:
+                    #evntsDF = pandas.DataFrame(found_evnt)
+                    print(i['event_name'])
+                    evnt_names.append(i['event_name'])
+                ans = listen_speak.listen()
+                evntName_check = [name for name in evnt_names if(name in ans.lower())]
+                if (len(evntName_check) > 0):
+                    evntName_check = evntName_check.pop()
+                #if evntName_check:
+                    idx = evnt_names.index(evntName_check)
+                else:
+                    retVal = "I'm sorry, I couldn't find that event"
+                    return retVal
+                    
+                evnt_collection.delete_one({'event_name' : f"{evnt_names[idx]}"})
+                retVal = f"{evnt_names[idx]} on {QuerydateDT} has been removed"
+                return retVal
+
             evnt_collection.delete_one({'event_start' : QuerydateDT})
-            retVal = f"The event on {QuerydateDT} has been removed"
+            retVal = f"The even on {QuerydateDT} has been removed"
+            
          else:
              sub1 = "delete"
              if "from" in text:
@@ -355,7 +523,27 @@ def delete_1event(text):
 
         
     
-        
+     
+    return retVal
+
+
+def delete_ALLevents(text, indx):
+    
+    if "on" in text:
+        Querydate = text.split("on ", 1)[1]
+    else:
+        Querydate = text.split(f"{read_strs[indx]} ",1)[1]
+
+    QuerydateDT = get_date(Querydate)
+    QuerydateDT = datetime.datetime.combine(QuerydateDT, datetime.datetime.min.time()) #returns form year-month-day 00:00:00
+
+    if evnt_collection.count_documents({'event_start': QuerydateDT}) == 0:
+        retVal = f"There are no events on {QuerydateDT}"
+        return retVal
+
+    evnt_collection.delete_many({'event_start' : QuerydateDT})
+    
+    retVal = f"Okay, I have removed all events on {Querydate}" 
     return retVal
     
 
