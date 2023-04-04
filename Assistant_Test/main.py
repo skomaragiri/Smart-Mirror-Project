@@ -24,7 +24,7 @@ class Assistant:
 
    
 
-    def __init__(self, name):
+    def __init__(self, name): # default constructor for Assistant class, used to name Assistant
         self.name = name # Create instance variable name
         
 #        self.speech_engine = pyttsx3.init()          # initialize text to speach engine for assistant replies
@@ -72,7 +72,7 @@ class Assistant:
     def reply(self, text):
         intent = intent_classifier.predict(text)  # takes user speech as text argument to predict intent using Naive Bayes model 
 
-        # Dictionary of user mapped functions based on predicted intent of user speech
+        # Dictionary of user mapped functions keyed on predicted intent of user speech
         replies = {                 
             'greeting' : hello,
             'leaving' : bye,
@@ -85,12 +85,12 @@ class Assistant:
             'help' : assist
             }
 
-        reply_func = replies[intent]    # reply_func gets the function to execute based on the intent predicted from user speech
+        reply_func = replies[intent]                 # reply_func gets the function to execute based on the intent predicted from user speech
 
-        if callable(reply_func):        # if the function is callable execute function
-             if (intent == 'internet'):
-                #self.say(reply_func(text))      # generates speech from returned text string in user function
-                listen_speak.say(reply_func(text))
+        if callable(reply_func):                     # if the function is callable execute function
+             if (intent == 'internet'):              # Conditional statements used for executing dictionary functions that take parameters in the form of user speech input
+                #self.say(reply_func(text))     
+                listen_speak.say(reply_func(text))   # return string from function call spoken by say method
              elif (intent == 'reminder'):
                 #self.say(reply_func(text))
                 listen_speak.say(reply_func(text))
@@ -117,8 +117,8 @@ class Assistant:
 
 
     def main(self):
-        WAKE = "hey marvis"
-        hour = int(datetime.datetime.now().hour)
+        WAKE = "hey marvis"                             # Wake phrase that must be spoken before assistant will execute functions
+        hour = int(datetime.datetime.now().hour)        # get current hour from system time and use it to greet user based on time of day
         if hour>= 0 and hour<12:
             #self.say("Good Morning!\n")
             listen_speak.say("Good Morning!\n")
@@ -130,21 +130,24 @@ class Assistant:
         else:
             #self.say("Good Evening!\n")
             listen_speak.say("Good Evening!\n") 
-        print("Say 'Hey Marvis' to get started")
-        while True:
-            #said = self.listen()        # listen for user speech input
-            #print("Listening")
-            said = listen_speak.listen()
 
-            if said.count(WAKE) > 0:
+        
+
+        while True:                                     # infinite loop 
+            print("Say 'Hey Marvis' to get started")        # Instruct user of what to say before they can ask for information
+            #said = self.listen()        
+            #print("Listening")
+            said = listen_speak.listen()                # listen for user speech input
+
+            if said.count(WAKE) > 0:                    # if number of non overlapping occurances of the wake phrase is greater than 0 listen for commands
                 
-                said = listen_speak.listen()   # * In Use *
-                #said = "Is it hot today"   # For debugging using text
-                #print(f"\nYou: {said}")     # print user speech for user friendliness and debugging purposes (what did the AI hear)
-                if(said == "qwertyifnfh"):  # if what was said was not understood
-                    continue
-                self.reply(said)            # take user speech as said argument for the reply function
+                said = listen_speak.listen()   # Listen method of listen_speak object to pick up user speech input                                          # * In Use *
+                #said = "Is it hot today"      # For debugging using text
+                #print(f"\nYou: {said}")       # print user speech for user friendliness and debugging purposes (what did the AI hear)
+                if(said == "qwertyifnfh"):     # if what was said was not understood. String of random characters returned from listen method exception handler as flag for conditional 
+                    continue                   # restart while loop 
+                self.reply(said)               # take user speech as said argument for the reply function
             
-intentclassifier = IntentClassifier()
-assistant = Assistant("Marvis")      # name of assistant was "Assistant"
-assistant.main()                        # run main method
+intentclassifier = IntentClassifier()          # create object of the intent classifier function to train AI model 
+assistant = Assistant("Marvis")                # create onject of the assistant class and name assistant "Marvis"
+assistant.main()                               # run main method
