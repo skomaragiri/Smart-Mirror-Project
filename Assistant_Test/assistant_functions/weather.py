@@ -8,7 +8,7 @@ api_key = '03e0a6f84da3d99aab0775a23353cba3'         # api key for openweatherma
 exclude = 'minute,hourly'                            # for forecast API call exclude the minutely and hourly forecast leaving an 8 day forecast
 default_city = 'pomona'                              # default city for weather calls city name
 default_lat = 34.0551                                # default city pomona latitude
-default_lon = 117.75                                 # default city pomona longitude
+default_lon = -117.75                                 # default city pomona longitude
 
 dt = datetime.now()                                  # get the current date and time from system time
 
@@ -32,6 +32,7 @@ def weather(request):
                 file.write(f"{str(default_lon)}\n")
             file.close()
             # lists for weather conditions: max temps, min temps, and descriptions
+            id = []
             highs = []
             lows = []
             #hum = []
@@ -46,6 +47,7 @@ def weather(request):
             forecast_data = api_forecast.json()
             api_weather = requests.get(weather_url)
             weather_data = api_weather.json()    
+            DefId = weather_data['id']
             # loop through daily weather data in forecast and populate lists with max and min temps as well as weather descriptions
             for i in forecast_data['daily']:
                 #print(i)
@@ -98,6 +100,7 @@ def weather(request):
     geo_url = f"http://api.openweathermap.org/geo/1.0/direct?q={req_loc}&limit={5}&appid={api_key}"     # openweathermap API call to geocode city name into lat and long coords
     api_geo_req = requests.get(geo_url)                                                                 # parse data with requests library
     geo_data = api_geo_req.json()                                                                       # store in json format
+
 
     # lists for city data
     cities = []
@@ -238,7 +241,14 @@ def weather(request):
         api_forecast = requests.get(forecast_url)
         forecast_data = api_forecast.json()
         api_weather = requests.get(weather_url)
-        weather_data = api_weather.json()    
+        weather_data = api_weather.json()   
+
+        ###############
+        sel_city_ID = weather_data['id']
+        with open('WeatherCityID.txt', 'w') as file:         # write final coords to text file to be used by front end
+            file.write(f"{str(sel_city_ID)}\n")
+        file.close()
+        ####################
 
         highs = []
         lows = []
@@ -320,6 +330,8 @@ def weather(request):
             file.write(f"{str(longitude)}\n")
         file.close()
 
+        
+
         # API calls and data collection
         forecast_url = f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&units=imperial&exclude={exclude}&appid={api_key}"
         weather_url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&units=imperial&APPID={api_key}"
@@ -328,7 +340,14 @@ def weather(request):
         forecast_data = api_forecast.json()
         api_weather = requests.get(weather_url)
         weather_data = api_weather.json()
-        
+
+        ###############
+        sel_city_ID = weather_data['id']
+        with open('WeatherCityID.txt', 'w') as file:         # write final coords to text file to be used by front end
+            file.write(f"{str(sel_city_ID)}\n")
+        file.close()
+        #####################
+
         highs = []
         lows = []
         #hum = []
@@ -337,11 +356,11 @@ def weather(request):
         descrip = []
 
         # if no weather data found
-        if(forecast_data['cod'] == '404'):
-            print("City Not Found")
-            returnVal = "Sorry, I could not find that city"
-            return returnVal
-        elif(weather_data['cod'] == '404'):
+        #if(forecast_data['cod'] == '404'):
+        #    print("City Not Found")
+        #    returnVal = "Sorry, I could not find that city"
+        #    return returnVal
+        if(weather_data['cod'] == '404'):
             print("City Not Found")
             returnVal = "Sorry, I could not find that city"
             return returnVal
