@@ -17,6 +17,9 @@ import speech_recognition as sr
 import datetime
 import time
 from time import strftime
+import winsound
+freq = 2500
+duration = 1000
 
 
 
@@ -134,13 +137,13 @@ class Assistant:
         
 
         while True:                                     # infinite loop 
-            print("Say 'Hey Marvis' to get started")        # Instruct user of what to say before they can ask for information
+            print("Say 'Hey Marvis' to get started, then speak after the beep")        # Instruct user of what to say before they can ask for information
             #said = self.listen()        
             #print("Listening")
             said = listen_speak.listen()                # listen for user speech input
 
             if said.count(WAKE) > 0:                    # if number of non overlapping occurances of the wake phrase is greater than 0 listen for commands
-                
+                winsound.Beep(freq, duration)
                 said = listen_speak.listen()   # Listen method of listen_speak object to pick up user speech input                                          # * In Use *
                 #said = "Is it hot today"      # For debugging using text
                 #print(f"\nYou: {said}")       # print user speech for user friendliness and debugging purposes (what did the AI hear)
