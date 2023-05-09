@@ -4,17 +4,16 @@ Marvis is a modular smart mirror geared towards the everyday homeowner and acts 
 
  
 <dl>
-Introduction: 
+<dt>Background</dt>
 
-<dd><dt>Background</dt></dd> 
+<dd>The advent of smart home devices has revolutionized the way people interact with technology, and the concept of a smart mirror is no exception. A smart mirror is a device that combines a mirror's functionality with technology that can display computer text and images. It allows users to see their reflection while also displaying information such as news, weather, and calendar events on the mirror's surface. The technology is achieved by using a two-way mirror with the correct reflectivity, which enables light to pass through one side of the glass while reflecting light on the other side. The side that is brighter will let light shine through the glass, displaying the computer text and images on the mirror's surface. Although the idea of a smart mirror is not new, it is still not widely available in the market due to a patent held by Hewlett Packard (HP) that expires in 2036. 
 
-<dd>The advent of smart home devices has revolutionized the way people interact with technology, and the concept of a smart mirror is no exception. A smart mirror is a device that combines a mirror's functionality with technology that can display computer text and images. It allows users to see their reflection while also displaying information such as news, weather, and calendar events on the mirror's surface. The technology is achieved by using a two-way mirror with the correct reflectivity, which enables light to pass through one side of the glass while reflecting light on the other side. The side that is brighter will let light shine through the glass, displaying the computer text and images on the mirror's surface. Although the idea of a smart mirror is not new, it is still not widely available in the market due to a patent held by Hewlett Packard (HP) that expires in 2036. </dd>
+Our smart mirror is designed with cost constraints in mind, which limits its size compared to other smart mirrors on the market. However, it is still an efficient and functional device that fulfills the basic requirements of a smart mirror. We use a 27-inch monitor that is mounted behind a one-way mirror glass with a transparency level of 30%. This monitor has the appropriate brightness to ensure that anything displayed on it that is not black is visible through the mirror. For navigation, most smart mirrors use an infrared (IR) sensor to allow the user to interact with the mirror by touching it; however, we have opted for a voice-controlled smart mirror due to the issues associated with fingerprints on the mirror. </dd>
+</dl>
+<dl>
+<dt>Operating System</dt> 
 
-: Our smart mirror is designed with cost constraints in mind, which limits its size compared to other smart mirrors on the market. However, it is still an efficient and functional device that fulfills the basic requirements of a smart mirror. We use a 27-inch monitor that is mounted behind a one-way mirror glass with a transparency level of 30%. This monitor has the appropriate brightness to ensure that anything displayed on it that is not black is visible through the mirror. For navigation, most smart mirrors use an infrared (IR) sensor to allow the user to interact with the mirror by touching it; however, we have opted for a voice-controlled smart mirror due to the issues associated with fingerprints on the mirror. 
-
-Operating System 
-
-Our smart mirror uses the Raspberry Pi 4B microcomputer as its main processing unit. The Raspberry Pi runs EndeavourOS, a Linux distribution for ARM, which is installed on a microSD card using the EndeavourOS ARM image installer found on the x86 version of the OS. We customized the desktop environment to run GNOME, which is further customized to meet our specific needs. The Raspberry Pi is connected to a microphone, which receives voice commands from the user. 
+<dd>Our smart mirror uses the Raspberry Pi 4B microcomputer as its main processing unit. The Raspberry Pi runs EndeavourOS, a Linux distribution for ARM, which is installed on a microSD card using the EndeavourOS ARM image installer found on the x86 version of the OS. We customized the desktop environment to run GNOME, which is further customized to meet our specific needs. The Raspberry Pi is connected to a microphone, which receives voice commands from the user. </dd>
 
 Voice Assistant 
 
