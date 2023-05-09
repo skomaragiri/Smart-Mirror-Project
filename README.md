@@ -5,7 +5,7 @@
 </dl>
  
 <dl>
- <dt>Background</dt>
+ <dt>Background:</dt>
  <br/>
  <dd>The advent of smart home devices has revolutionized the way people interact with technology, and the concept of a smart mirror is no exception. A smart mirror is a device that combines a mirror's functionality with technology that can display computer text 
  and images. It allows users to see their reflection while also displaying information such as news, weather, and calendar events on the mirror's surface. The technology is achieved by using a two-way mirror with the correct reflectivity, which enables light to 
@@ -18,14 +18,14 @@
 </dl>
 
 <dl>
- <dt>Operating System</dt> 
+ <dt>Operating System:</dt> 
  <br/>
  <dd>Our smart mirror uses the Raspberry Pi 4B microcomputer as its main processing unit. The Raspberry Pi runs EndeavourOS, a Linux distribution for ARM, which is installed on a microSD card using the EndeavourOS ARM image installer found on the x86 version of  
   the OS. We customized the desktop environment to run GNOME, which is further customized to meet our specific needs. The Raspberry Pi is connected to a microphone, which receives voice commands from the user. </dd>
 </dl>
 
 <dl>
- <dt>Voice Assistant</dt> 
+ <dt>Voice Assistant:</dt> 
  <br/>
  <dd>Our smart mirror uses a voice assistant to provide a hands-free user experience. The voice assistant is programmed to respond to voice commands, which are processed by a microphone embedded in the mirror’s wooden frame. The voice assistant is trained to 
  respond to the wake word "Marvis" and can perform a variety of functions including providing weather updates, setting reminders and appointments, reading the news, and controlling the mirror’s display. </dd>
@@ -45,14 +45,14 @@
 </dl>
 
 <dl>
- <dt>Hardware</dt> 
+ <dt>Hardware:</dt> 
  <br/>
  <dd>The Raspberry Pi and microphone are housed in a wooden frame constructed by hand, which also serves as the frame for the mirror. The mirror glass was ordered from a third-party company that provides one-way smart mirror glass with a desired level of transparency of 30% transparent and 70% 
   reflective. The display for the mirror was also purchased and is installed right behind the glass within the wooden frame. The Raspberry Pi is connected to the display and placed out of sight in the frame. The microphone is placed right behind a hole in the frame to take voice input. </dd>
 </dl>
 
 <dl>
- <dt>Applications</dt>
+ <dt>Applications:</dt>
  <br/>
 <dd>The smart mirror is equipped with several applications that can be controlled using voice commands. The mirror features a customized front-end built using React.js, which includes a calendar application for scheduling daily tasks and a weather application that displays weather conditions and forecasts. </dd>
 
