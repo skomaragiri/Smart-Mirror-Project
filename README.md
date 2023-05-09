@@ -1,6 +1,6 @@
 <dl>
  <dt>Abstract:</dt> 
-
+ <br/>
 <dd>Marvis is a modular smart mirror geared towards the everyday homeowner and acts as a productivity tool. It includes functionalities such as providing weather information, calendar reminders, and web searching, all while allowing you to see yourself in the mirror. The text and pictures are displayed through the one-way mirror as only the light can pass through, but the surface of the mirror remains reflective. Marvis is a fully speech-controlled mirror. That means that you can easily navigate the apps on the smart mirror without creating any fingerprint smudges on the physical mirror. </dd>
 </dl>
  
