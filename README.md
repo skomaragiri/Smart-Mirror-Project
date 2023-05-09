@@ -10,12 +10,16 @@ Marvis is a modular smart mirror geared towards the everyday homeowner and acts 
 
 Our smart mirror is designed with cost constraints in mind, which limits its size compared to other smart mirrors on the market. However, it is still an efficient and functional device that fulfills the basic requirements of a smart mirror. We use a 27-inch monitor that is mounted behind a one-way mirror glass with a transparency level of 30%. This monitor has the appropriate brightness to ensure that anything displayed on it that is not black is visible through the mirror. For navigation, most smart mirrors use an infrared (IR) sensor to allow the user to interact with the mirror by touching it; however, we have opted for a voice-controlled smart mirror due to the issues associated with fingerprints on the mirror. </dd>
 </dl>
+
 <dl>
-<dt>Operating System</dt> 
+ <dt>Operating System</dt> 
+ <br/>
+ <dd>Our smart mirror uses the Raspberry Pi 4B microcomputer as its main processing unit. The Raspberry Pi runs EndeavourOS, a Linux distribution for ARM, which is installed on a microSD card using the EndeavourOS ARM image installer found on the x86 version of  
+  the OS. We customized the desktop environment to run GNOME, which is further customized to meet our specific needs. The Raspberry Pi is connected to a microphone, which receives voice commands from the user. </dd>
+</dl>
 
-<dd>Our smart mirror uses the Raspberry Pi 4B microcomputer as its main processing unit. The Raspberry Pi runs EndeavourOS, a Linux distribution for ARM, which is installed on a microSD card using the EndeavourOS ARM image installer found on the x86 version of the OS. We customized the desktop environment to run GNOME, which is further customized to meet our specific needs. The Raspberry Pi is connected to a microphone, which receives voice commands from the user. </dd>
-
-Voice Assistant 
+<dl>
+ <dt>Voice Assistant</dt> 
 
 Our smart mirror uses a voice assistant to provide a hands-free user experience. The voice assistant is programmed to respond to voice commands, which are processed by a microphone embedded in the mirror’s wooden frame. The voice assistant is trained to respond to the wake word "Marvis" and can perform a variety of functions including providing weather updates, setting reminders and appointments, reading the news, and controlling the mirror’s display. 
 
