@@ -5,10 +5,10 @@ Marvis is a modular smart mirror geared towards the everyday homeowner and acts 
  
 
 Introduction: 
+<dl>
+<dt>Background</dt> 
 
-Background 
-
-<dt>The advent of smart home devices has revolutionized the way people interact with technology, and the concept of a smart mirror is no exception. A smart mirror is a device that combines a mirror's functionality with technology that can display computer text and images. It allows users to see their reflection while also displaying information such as news, weather, and calendar events on the mirror's surface. The technology is achieved by using a two-way mirror with the correct reflectivity, which enables light to pass through one side of the glass while reflecting light on the other side. The side that is brighter will let light shine through the glass, displaying the computer text and images on the mirror's surface. Although the idea of a smart mirror is not new, it is still not widely available in the market due to a patent held by Hewlett Packard (HP) that expires in 2036. </dt>
+<dd>The advent of smart home devices has revolutionized the way people interact with technology, and the concept of a smart mirror is no exception. A smart mirror is a device that combines a mirror's functionality with technology that can display computer text and images. It allows users to see their reflection while also displaying information such as news, weather, and calendar events on the mirror's surface. The technology is achieved by using a two-way mirror with the correct reflectivity, which enables light to pass through one side of the glass while reflecting light on the other side. The side that is brighter will let light shine through the glass, displaying the computer text and images on the mirror's surface. Although the idea of a smart mirror is not new, it is still not widely available in the market due to a patent held by Hewlett Packard (HP) that expires in 2036. </dd>
 
 : Our smart mirror is designed with cost constraints in mind, which limits its size compared to other smart mirrors on the market. However, it is still an efficient and functional device that fulfills the basic requirements of a smart mirror. We use a 27-inch monitor that is mounted behind a one-way mirror glass with a transparency level of 30%. This monitor has the appropriate brightness to ensure that anything displayed on it that is not black is visible through the mirror. For navigation, most smart mirrors use an infrared (IR) sensor to allow the user to interact with the mirror by touching it; however, we have opted for a voice-controlled smart mirror due to the issues associated with fingerprints on the mirror. 
 
@@ -27,7 +27,7 @@ The voice assistant is designed to be customizable, so users can add or remove f
 In addition to the voice recognition capabilities, the smart mirror also utilizes TensorFlow for wake detection. The wake word for the mirror is "Marvis," and the TensorFlow algorithm is trained to detect when the user says the wake word. This feature not only enhances the user experience but also saves energy by not constantly running when it is not in use. 
 
 The wake detection algorithm was trained using a dataset of audio clips containing the wake word. The audio clips were annotated to indicate the presence or absence of the wake word. The annotated audio clips were then used to train a Recurrent Neural Network (RNN) to recognize when the user says "Marvis." Once the RNN was trained, it was imported into the smart mirror and integrated into the wake detection system. When the mirror detects the wake word, it will wake up and be ready for voice commands. 
-
+</dl>
 Hardware 
 
 The Raspberry Pi and microphone are housed in a wooden frame constructed by hand, which also serves as the frame for the mirror. The mirror glass was ordered from a third-party company that provides one-way smart mirror glass with a desired level of transparency of 30% transparent and 70% reflective. The display for the mirror was also purchased and is installed right behind the glass within the wooden frame. The Raspberry Pi is connected to the display and placed out of sight in the frame. The microphone is placed right behind a hole in the frame to take voice input. 
